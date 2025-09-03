@@ -1,0 +1,95 @@
+@startuml
+class JuegoTetris
+class Control
+class Jugador
+class Tablero
+class Pieza
+class Tetromino
+class Forma
+class Color
+class Azul
+class Rojo
+class Verde
+class Amarillo
+class Cian
+class Morado
+class Naranja
+class Animacion
+class EfectosSonido
+class Posicion
+class Direccion
+class ScoreManager
+class TemporizadorJuego
+class DetectorColisiones
+class EstadoJuego
+class EstadoActivo
+class EstadoPausado
+class EstadoGameOver
+class MenuPrincipal
+class Boton
+class ConfiguracionJuego
+class Dificultad
+class VelocidadJuego
+class PowerUp
+class IA
+class Aleatorio
+class Record
+class ContadorPuntos
+
+JuegoTetris *-- Control
+JuegoTetris *-- Jugador
+JuegoTetris *-- Tablero
+JuegoTetris *-- Pieza
+JuegoTetris o-- ScoreManager
+JuegoTetris o-- TemporizadorJuego
+JuegoTetris o-- DetectorColisiones
+JuegoTetris o-- Animacion
+JuegoTetris o-- EfectosSonido
+JuegoTetris *-- EstadoJuego
+JuegoTetris *-- MenuPrincipal
+JuegoTetris *-- ConfiguracionJuego
+JuegoTetris *-- PowerUp
+JuegoTetris o-- IA
+
+Jugador o-- Control
+Jugador o-- Pieza
+
+Pieza *-- Tetromino
+Pieza *-- Posicion
+Pieza o-- Direccion
+Pieza o-- Color
+Pieza o-- PowerUp
+
+Tablero *-- Posicion
+
+Tetromino --|> Pieza
+Forma *-- Tetromino
+
+Azul --|> Color
+Rojo --|> Color
+Verde --|> Color
+Amarillo --|> Color
+Cian --|> Color
+Morado --|> Color
+Naranja --|> Color
+
+EstadoActivo --|> EstadoJuego
+EstadoPausado --|> EstadoJuego
+EstadoGameOver --|> EstadoJuego
+
+MenuPrincipal *-- Boton
+
+ConfiguracionJuego *-- Dificultad
+ConfiguracionJuego *-- VelocidadJuego
+
+ScoreManager o-- ContadorPuntos
+ScoreManager *-- Record
+
+DetectorColisiones o-- Pieza
+DetectorColisiones o-- Tablero
+DetectorColisiones o-- PowerUp
+
+Aleatorio --|> IA
+IA o-- Pieza
+
+@enduml
