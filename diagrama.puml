@@ -1,4 +1,6 @@
-@startuml
+@startuml Tetris
+
+
 class JuegoTetris
 class Control
 class Jugador
@@ -7,13 +9,6 @@ class Pieza
 class Tetromino
 class Forma
 class Color
-class Azul
-class Rojo
-class Verde
-class Amarillo
-class Cian
-class Morado
-class Naranja
 class Animacion
 class EfectosSonido
 class Posicion
@@ -35,61 +30,65 @@ class IA
 class Aleatorio
 class Record
 class ContadorPuntos
+class MemoriaJuego
+class InterfazUsuario
 
-JuegoTetris *-- Control
-JuegoTetris *-- Jugador
-JuegoTetris *-- Tablero
-JuegoTetris *-- Pieza
-JuegoTetris o-- ScoreManager
-JuegoTetris o-- TemporizadorJuego
-JuegoTetris o-- DetectorColisiones
-JuegoTetris o-- Animacion
-JuegoTetris o-- EfectosSonido
-JuegoTetris *-- EstadoJuego
-JuegoTetris *-- MenuPrincipal
-JuegoTetris *-- ConfiguracionJuego
-JuegoTetris *-- PowerUp
-JuegoTetris o-- IA
 
-Jugador o-- Control
-Jugador o-- Pieza
+JuegoTetris "1" *-- "1" Control
+JuegoTetris "1" *-- "1" Jugador
+JuegoTetris "1" *-- "1" Tablero
+JuegoTetris "1" o-- "1" ScoreManager
+JuegoTetris "1" o-- "1" TemporizadorJuego
+JuegoTetris "1" o-- "1" DetectorColisiones
+JuegoTetris "1" o-- "1" Animacion
+JuegoTetris "1" o-- "1" EfectosSonido
+JuegoTetris "1" *-- "1" EstadoJuego
+JuegoTetris "1" *-- "1" MenuPrincipal
+JuegoTetris "1" *-- "1" ConfiguracionJuego
+JuegoTetris "1" *-- "*" PowerUp
+JuegoTetris "1" o-- "1" IA
 
-Pieza *-- Tetromino
-Pieza *-- Posicion
-Pieza o-- Direccion
-Pieza o-- Color
-Pieza o-- PowerUp
+' Nuevas relaciones
+JuegoTetris "1" o-- "1" MemoriaJuego
+JuegoTetris "1" o-- "1" InterfazUsuario
 
-Tablero *-- Posicion
+MemoriaJuego "1" o-- "1" ScoreManager
+MemoriaJuego "1" o-- "1" ConfiguracionJuego
 
-Tetromino --|> Pieza
-Forma *-- Tetromino
+InterfazUsuario *-- MenuPrincipal
+InterfazUsuario *-- Tablero
+InterfazUsuario *-- Animacion
 
-Azul --|> Color
-Rojo --|> Color
-Verde --|> Color
-Amarillo --|> Color
-Cian --|> Color
-Morado --|> Color
-Naranja --|> Color
+Jugador "1" o-- "1" Control
+Jugador "1" o-- "1" Pieza
+
+Pieza "1" *-- "1" Tetromino
+Pieza "1" *-- "1" Posicion
+Pieza "1" *-- "1" Direccion
+Pieza "1" o-- "1" Color
+Pieza "1" o-- "0..1" PowerUp
+
+Tablero "1" *-- "0..*" Posicion
+
+Forma "1" *-- "1..*" Tetromino
 
 EstadoActivo --|> EstadoJuego
 EstadoPausado --|> EstadoJuego
 EstadoGameOver --|> EstadoJuego
 
-MenuPrincipal *-- Boton
+MenuPrincipal "1" *-- "1..*" Boton
 
-ConfiguracionJuego *-- Dificultad
-ConfiguracionJuego *-- VelocidadJuego
+ConfiguracionJuego "1" *-- "1" Dificultad
+ConfiguracionJuego "1" *-- "1" VelocidadJuego
 
-ScoreManager o-- ContadorPuntos
-ScoreManager *-- Record
+ScoreManager "1" o-- "1" ContadorPuntos
+ScoreManager "1" *-- "1..*" Record
 
-DetectorColisiones o-- Pieza
-DetectorColisiones o-- Tablero
-DetectorColisiones o-- PowerUp
+DetectorColisiones "1" o-- "1..*" Pieza
+DetectorColisiones "1" o-- "1" Tablero
+DetectorColisiones "1" o-- "0..*" PowerUp
 
 Aleatorio --|> IA
-IA o-- Pieza
+IA "1" o-- "1" Control
 
 @enduml
