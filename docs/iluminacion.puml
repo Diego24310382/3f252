@@ -1,0 +1,14 @@
+@startuml iluminacion
+
+class Foco{
+    - Estadofoco
+    + Encender()
+    + Apagar()
+    + Estadofoco LeerEstado()
+}
+class Estadofoco
+
+Foco *-- Estadofoco
+Estadofoco--|> bool
+
+@enduml
